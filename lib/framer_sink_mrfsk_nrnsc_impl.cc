@@ -152,6 +152,7 @@ namespace gr {
                                             else
                                                 printf("crc_32 fail: %08x vs %08x\n", crc_32, rx_crc);
                                         }
+                                        printf("Nikos Periptwsi NRRC\n");
                                         message::sptr msg = message::make(1, phr.word, crc_ok, phr_psdu_buf_idx-PHR_LENGTH);
                                         memcpy(msg->msg(), phr_psdu_buf+PHR_LENGTH, phr_psdu_buf_idx-PHR_LENGTH);
                                         d_target_queue->insert_tail(msg);   // send it

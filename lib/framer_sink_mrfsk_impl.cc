@@ -91,8 +91,8 @@ namespace gr {
                     while (count < noutput_items) {
                         phr.word = (phr.word << 1) | (in[count++] & 1);
                         if (++d_headerbitlen_cnt == HEADERBITLEN) {
-                            //printf(" phr.word:%04x ", phr.word);
-                            //printf("frame_length:%d dw:%d ", phr.bits.frame_length, phr.bits.DW);
+                            //printf(" phr.word:%04x\n", phr.word);
+                            //printf("frame_length:%d dw:%d\n", phr.bits.frame_length, phr.bits.DW);
                             if (phr.bits.FCS) {
                                 //printf("16bit-CRC\n");
                                 crc16_ = INITIAL_CRC16;
@@ -149,6 +149,7 @@ namespace gr {
                                     else
                                         printf("crc_32 fail: %08x vs %08x\n", crc_32, rx_crc);
                                 }
+                                printf("Nikos Periptwsi uncoded\n");
                                 message::sptr msg = message::make(0, phr.word, crc_ok, d_packetlen_cnt);
                                 memcpy(msg->msg(), d_packet, d_packetlen_cnt);
                                 d_target_queue->insert_tail(msg);   // send it

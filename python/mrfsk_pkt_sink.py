@@ -84,26 +84,26 @@ class _packet_decoder_thread(_threading.Thread):
             fec = int(msg.type())
             if fec != 0:
                 print "FEC ",
-            print "PHR:%04x " % phr,
+            print "PHR:%04x\n" % phr,
             if phr & 0x0800:
-                print "dw ",
+                print "dw\n",
             crc_ok = int(msg.arg2())
             if crc_ok == 1:
                 self.pkts_good += 1
                 if phr & 0x1000:
-                    print "CRC16-ok    ",
+                    print "CRC16-ok\n",
                 else:
-                    print "crc32-ok    ",
+                    print "CRC32-ok\n",
             else:
                 self.pkts_bad += 1
                 if phr & 0x1000:
-                    print "[41mCRC16-fail    ",
+                    print "CRC16-fail\n",
                 else:
-                    print "[41mcrc32-fail    ",
+                    print "CRC32-fail\n",
 
             s = msg.to_string()
             print ' '.join(x.encode('hex') for x in s)
             if crc_ok == 0:
                 print "[0m",
-            print "good:%d, bad:%d" % (self.pkts_good, self.pkts_bad)
+            print "good:%d, bad:%d\n" % (self.pkts_good, self.pkts_bad)
 
